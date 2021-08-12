@@ -57,14 +57,15 @@ switch(empCheck)
     case PART_TIME:
         empHrs=PART_TIME_HRS1;
         console.log("UC3-->Part time employee: " +empHrs);
-        break;
+        return empHrs;
         case FULL_TIME:
             empHrs=FULL_TIME_HRS1;
             console.log("UC3--->Full time employee :" +empHrs);
-            break;
+            return empHrs;
             default:
                 empHrs=0;
                 console.log("UC3--->Employee is absent " +empHrs);
+                return empHrs;
 }
 }
 let empHrs1=0;
@@ -74,3 +75,19 @@ empWage1=empHrs*WAGE_PER_HR1;
 console.log("UC3--->Emp Wage : "+empWage1);
 }
 
+//UC4---USING FOR LOOP
+
+const NUM_OF_WORKING_DAYS=20;
+let totalEmpWage=0;
+const WAGE_PER_HR2=20;
+let empHrs2=0;
+let empWage2=0;
+for(let i=0;i<NUM_OF_WORKING_DAYS;i++)
+{
+    var empCheck=Math.floor(Math.random()*10)%3;
+     empHrs2=getWorkinghours(empCheck);
+    empWage2=empHrs2*WAGE_PER_HR2;
+    console.log("emp wage : "+empWage2);
+    totalEmpWage+=empWage2;
+}
+console.log("UC4-->fOR LOOP :TotalEmpWage : "+totalEmpWage ,"Num of Working Days : "+NUM_OF_WORKING_DAYS);

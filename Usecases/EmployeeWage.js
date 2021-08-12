@@ -1,5 +1,5 @@
 //If Statement
-//UC1
+//UC1-->check employee is present or not
 const IS_ABSENT=0;
 {
 var empCheck=Math.floor(Math.random()*10)%2;
@@ -13,7 +13,7 @@ else
 }
 }
 
-//UC2
+//UC2-->calculate daily employee wage
 const IS_PART_TIME=1;
 const IS_FULL_TIME=2;
 const PART_TIME_HRS=4;
@@ -75,7 +75,7 @@ empWage1=empHrs*WAGE_PER_HR1;
 console.log("UC3--->Emp Wage : "+empWage1);
 }
 
-//UC4---USING FOR LOOP
+//UC4--- calculate wages for month assuming 20 working days in month(USING FOR LOOP)
 
 const NUM_OF_WORKING_DAYS=20;
 let totalEmpWage=0;
@@ -91,3 +91,17 @@ for(let i=0;i<NUM_OF_WORKING_DAYS;i++)
     totalEmpWage+=empWage2;
 }
 console.log("UC4-->fOR LOOP :TotalEmpWage : "+totalEmpWage ,"Num of Working Days : "+NUM_OF_WORKING_DAYS);
+
+//UC5--->calculate wages for total working hours 160 or max days of 20 in month
+
+const MAX_HRS_IN_MONTH=160;
+let totalEmpHrs=0;
+let totalWorkingDays=0;
+while(totalEmpHrs<=MAX_HRS_IN_MONTH && totalWorkingDays<NUM_OF_WORKING_DAYS)
+{
+    totalWorkingDays++;
+    var empCheck=Math.floor(Math.random()*10)%3;
+    totalEmpHrs+=getWorkinghours(empCheck);
+}
+let empWage3=totalEmpHrs*WAGE_PER_HR2;
+console.log("UC5-Total Days : "+ totalWorkingDays + " Total Hours : "+totalEmpHrs + " Emp Wage : "+empWage3);

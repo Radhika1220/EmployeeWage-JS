@@ -125,6 +125,66 @@ while(totalEmpHrs1<=MAX_HRS_IN_MONTH1 && totalWorkingDays1<NUM_OF_WORKING_DAYS1)
     employeeWageArray.push(calculateDailyWage(empHrs));
 }
 console.log("UC6-->Total days : " +totalWorkingDays1 + " Total Hrs: " +totalEmpHrs1 + " Emp wage " +empWage3);
+                             //UC7--Array Helper Function
+let totalEmpWage1=0;
+function sum(dailyWage)
+{
+    totalEmpWage1+=dailyWage;
+}
+//using foreach--->UC-7A
+employeeWageArray.forEach(sum);
+console.log("UC-7A-using foreach helper method "+totalEmpWage1);
+//get total wage funtion for using reduce method
+function getTotalWage(total,dailyWage)
+{
+    return total+dailyWage;
+}
+//using reduce method--->UC-7A
+console.log("UC-7A-using reduce helper method "+employeeWageArray.reduce(getTotalWage,0));
+//UC-7B
+let dayCount=0;
+//function to count the day and dailwage
+function generateMap(dailyWage)
+{
+    dayCount++;
+    return "Day "+dayCount+ ":"+dailyWage;
+}
+//Using map method in array
+let dayCountAndDailyWage=employeeWageArray.map(generateMap);
+console.log("UC-7B Map method using array " +dayCountAndDailyWage.join(" "));
+//function-->to get only full time employee using includes
+function fullTimeWage(dailyWage)
+{
+return dailyWage.includes("160");
+}
+//filter method-->UC-7C
+let fullTimeEmployee=dayCountAndDailyWage.filter(fullTimeWage);
+console.log("UC-7C--Filter method to get only full time employee "+fullTimeEmployee.join(" "));
 
+//find method to get the first occcurence of full time employee-->UC-7D
+let findFirstOccurenceOfFullTimeEmp=fullTimeEmployee.find(fullTimeWage);
+console.log("UC-7D--Using find method to find first occurence of full time employee " +findFirstOccurenceOfFullTimeEmp);
 
+//check the fulltimeemployee array whether it contains fulltime(160) or not-->UC-7E
+let checkFullTimeEmp=fullTimeEmployee.every(fullTimeWage);
+console.log("UC-7E--Check all the elements whether it is fulltime or not : " +checkFullTimeEmp);
 
+//UC-7F
+function partTimeWage(dailyWage)
+{
+return dailyWage.includes("80");
+}
+let checkPartTimeEmp=dayCountAndDailyWage.some(partTimeWage);
+console.log("UC-7F-->Check if atleast part time employee is present or not "+checkPartTimeEmp);
+//UC-7G-->Number of days employee worked
+let workingDay=0
+function numOfDaysWorked(numberOfDays,dailWage)
+{
+    if(dailWage>0)
+    {
+        workingDay++;
+    }
+ return workingDay;
+}
+
+console.log("UC-7G-->Number of days employee worked : "+employeeWageArray.reduce(numOfDaysWorked,0));

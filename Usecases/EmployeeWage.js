@@ -149,8 +149,23 @@ empWageAndHourArray.push(
         }
     }
     );
-}
 console.log("UC-10-->Showing daily hours worked and employee wage : "+empWageAndHourArray);
+//UC-11A-->total wage and total hours using object
+let totalWagesObject=empWageAndHourArray.filter(dailyHrsAndWage=>dailyHrsAndWage.DailyEmpWage>0)
+                    .reduce((totalWage,dailyHrsAndWage)=>totalWage+=dailyHrsAndWage.DailyEmpWage,0);
+
+let totalHoursObject=empWageAndHourArray.filter(dailyHrsAndWage=>dailyHrsAndWage.DailyEmpHrs>0)
+                    .reduce((totalHrs,dailyHrsAndWage)=>totalHrs+=dailyHrsAndWage.DailyEmpHrs,0);
+console.log("UC-11A-->Total empHrs : "+totalHoursObject  + " Total wages :"+totalWagesObject);
+//UC-11B-->finding the full time employee using object and arrow function
+console.log("UC-11B-->Logging full time working day");
+empWageAndHourArray.filter(dailyHrsAndWage=>dailyHrsAndWage.DailyEmpHrs==8).forEach(dailyHrsAndWage=>process.stdout.write(dailyHrsAndWage.toString()));
+//UC-11C-->finding the part time employee using object and arrow function
+let partTimeWorkingDay=empWageAndHourArray.filter(dailyHrsAndWage=>dailyHrsAndWage.DailyEmpHrs==4).map(dailyHrsAndWage=>dailyHrsAndWage.toString());
+console.log("UC-11C-->Logging part time working day "+partTimeWorkingDay);
+//UC-11D-->finding the no working day using object and arrow function
+let noWorkingDay1=empWageAndHourArray.filter(dailyHrsAndWage=>dailyHrsAndWage.DailyEmpHrs==0).map(dailyHrsAndWage=>dailyHrsAndWage.toString());
+console.log("UC-11D-->Logging no time working day:"+noWorkingDay1);
 console.log("UC6-->Total days : " +totalWorkingDays1 + " Total Hrs: " +totalEmpHrs1 + " Emp wage " +empWage3);
                              //UC7--Array Helper Function
 let totalEmpWage1=0;
@@ -258,3 +273,4 @@ employeeHourMap.forEach((value,key,map)=>
 console.log("UC-9B-->Full time working days "+fullTime);
 console.log("UC-9B-->part time working days "+partTime);
 console.log("UC-9B-->no working days "+noWorkingDay);
+}

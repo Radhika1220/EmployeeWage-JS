@@ -117,8 +117,10 @@ let totalEmpHrs1=0;
 let totalWorkingDays1=0;
 //creating a array
 let employeeWageArray=new Array();
-//Creating a map function 
+//Creating a map function for employeewage
 let employeeWageMap=new Map();
+//Creating a map function for employeehours
+let employeeHourMap=new Map();
 while(totalEmpHrs1<=MAX_HRS_IN_MONTH1 && totalWorkingDays1<NUM_OF_WORKING_DAYS1)
 {
     totalWorkingDays1++;
@@ -126,8 +128,12 @@ while(totalEmpHrs1<=MAX_HRS_IN_MONTH1 && totalWorkingDays1<NUM_OF_WORKING_DAYS1)
     empHrs=getWorkinghours(empCheck);
     totalEmpHrs1+=empHrs;
     let dailyWage=calculateDailyWage(empHrs);
+    //push the value in array
     employeeWageArray.push(dailyWage);
+     //set the value in map
     employeeWageMap.set(totalWorkingDays1,dailyWage);
+    //set the value in map
+    employeeHourMap.set(totalWorkingDays1,empHrs);
 }
 console.log("UC6-->Total days : " +totalWorkingDays1 + " Total Hrs: " +totalEmpHrs1 + " Emp wage " +empWage3);
                              //UC7--Array Helper Function
@@ -199,3 +205,40 @@ for (let [key,value] of employeeWageMap)
     console.log("Key : "+key+"\t" + "Value : "+value);
 }
 console.log("Totalwage using Map "+Array.from(employeeWageMap.values()).reduce(getTotalWage,0));
+console.log("***Employee hour map***")
+//print the employee hour map
+for (let [key,value] of employeeHourMap)
+{
+    console.log("Key : "+key+"\t" + "Value : "+value);
+}
+//UC-9A
+//creating a arrow function for calculating totalwage
+let totalWageMap=(total,dailWage)=>
+{
+    return total+dailWage;
+}
+let totalWageUsingMap=Array.from(employeeWageMap.values()).filter(x=>x>0).reduce(totalWageMap,0);
+
+let totalEmpHrsUsingMap=Array.from(employeeHourMap.values()).reduce(totalWageMap,0);
+
+console.log("UC-9A-->Total wage using Map:"+totalWageUsingMap+ " Total Employee Hours using map "+totalEmpHrsUsingMap);
+//UC-9B-->creating a array for fulltime,parttime and no working day
+let fullTime=new Array();
+let partTime=new Array();
+let noWorkingDay=new Array();
+employeeHourMap.forEach((value,key,map)=>
+{
+    console.log("Key : "+key+"\t" + "Value : "+value);
+    if(value==8)
+        fullTime.push(8);
+    
+    else if(value==4)
+        partTime.push(4);
+  
+    else   
+        noWorkingDay.push(0);
+});
+
+console.log("UC-9B-->Full time working days "+fullTime);
+console.log("UC-9B-->part time working days "+partTime);
+console.log("UC-9B-->no working days "+noWorkingDay);

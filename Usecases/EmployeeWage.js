@@ -121,6 +121,8 @@ let employeeWageArray=new Array();
 let employeeWageMap=new Map();
 //Creating a map function for employeehours
 let employeeHourMap=new Map();
+//creating a array for object 
+let empWageAndHourArray=new Array();
 while(totalEmpHrs1<=MAX_HRS_IN_MONTH1 && totalWorkingDays1<NUM_OF_WORKING_DAYS1)
 {
     totalWorkingDays1++;
@@ -134,7 +136,21 @@ while(totalEmpHrs1<=MAX_HRS_IN_MONTH1 && totalWorkingDays1<NUM_OF_WORKING_DAYS1)
     employeeWageMap.set(totalWorkingDays1,dailyWage);
     //set the value in map
     employeeHourMap.set(totalWorkingDays1,empHrs);
+//object creation-->holding the data as day,dailyemphours,empwage---UC-10
+empWageAndHourArray.push(
+    {
+        Day:totalWorkingDays1,
+        DailyEmpHrs:empHrs,
+        DailyEmpWage:dailyWage,
+        //tostring mthod to print the data
+        toString()
+        {
+            return "Day: "+this.Day+ " Working hours: "+this.DailyEmpHrs + " Daily Emp Wage : "+this.DailyEmpWage+"\n";
+        }
+    }
+    );
 }
+console.log("UC-10-->Showing daily hours worked and employee wage : "+empWageAndHourArray);
 console.log("UC6-->Total days : " +totalWorkingDays1 + " Total Hrs: " +totalEmpHrs1 + " Emp wage " +empWage3);
                              //UC7--Array Helper Function
 let totalEmpWage1=0;

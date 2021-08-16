@@ -4,7 +4,6 @@ class EmployeePayrollData
 {
     //property
     id;
-    name;
     salary;
     //adding the property of gender and startdate
     gender;
@@ -13,7 +12,7 @@ class EmployeePayrollData
     constructor(...params)
     {
         this.id=params[0];
-        this.name=params[1];
+        this.name1=params[1];
         this.salary=params[2];
         this.gender=params[3];
         this.startDate=params[4];
@@ -21,11 +20,21 @@ class EmployeePayrollData
     //getter and setter methods
     get name()
     {
-        return this.name;
+        return this._name;
     }
     set name(name)
     {
-        this.name=name;
+        //UC13-->checking the name  contain atleast 3 characters and first character should be capital letter
+        let nameRegex=RegExp('^[A-Z]{1}[a-z]{2,}$');
+        if(nameRegex.test(name))
+        {
+        this._name=name;
+        }
+        else
+        {
+            throw "Incorrect name";
+        }
+
     }
     get salary()
     {
@@ -38,11 +47,11 @@ class EmployeePayrollData
     //tostring method
     toString()
     {
-        return "id="+this.id + " name="+this.name + " salary="+this.salary + " Gender="+this.gender +" Date="+this.startDate;
+        return "id="+this.id + " name="+this.name1 + " salary="+this.salary + " Gender="+this.gender +" Date="+this.startDate;
     }
     toString1()
     {
-        return "id="+this.id + " name="+this.name + " salary="+this.salary;
+        return "id="+this.id + " name="+this.name1 + " salary="+this.salary;
     }
 }
 //creating a object for class and passing the parameter(calling constructor)
@@ -52,10 +61,16 @@ console.log(employee.toString1());
 
 console.log("Change the property using getter and setter method");
 //change the name using getter and setter method
-employee.name="Priya";
+try
+{
+employee.name="P";
 employee.salary="50000"
-console.log(employee.toString1());
-
+console.log(employee.name);
+}
+catch(e)
+{
+    console.error(e);
+}
 let employee1=new EmployeePayrollData(2,"VishnuPriya",55000,'F',new Date());
 console.log(employee1.toString());
 
